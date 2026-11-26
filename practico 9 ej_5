@@ -1,0 +1,39 @@
+// Ejercicio 5: Descuenta unidades vendidas validando disponibilidad (compare)
+void registrarVenta(string productos[], string marcas[], int cantidades[], int total) {
+    if (total == 0) {
+        cout << "El inventario esta vacio.\n";
+        return;
+    }
+
+    string nom, mar;
+    cout << "Nombre exacto del producto a vender: ";
+    getline(cin, nom);
+    cout << "Marca exacta del producto: ";
+    getline(cin, mar);
+
+    int idx = buscarExacto(productos, marcas, total, nom, mar);
+    if (idx == -1) {
+        cout << "Producto no encontrado.\n";
+        return;
+    }
+
+    int unidades;
+    cout << "Stock disponible: " << cantidades[idx] << ". Unidades a vender: ";
+    if (!(cin >> unidades)) {
+        cin.clear();
+        cin.ignore(10000, '\n');
+        cout << "Error: Cantidad invalida.\n";
+        return;
+    }
+    cin.ignore(10000, '\n');
+
+    if (unidades <= 0 || unidades > cantidades[idx]) {
+        cout << "Error: La venta debe ser mayor que 0 y no superar el stock disponible ("
+             << cantidades[idx] << "). No se modifico el stock.\n";
+        return;
+    }
+
+    cantidades[idx] -= unidades;
+    cout << "Venta registrada con exito. Stock restante de " << productos[idx]
+         << ": " << cantidades[idx] << " unidades.\n";
+}
