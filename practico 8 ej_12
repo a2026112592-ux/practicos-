@@ -1,0 +1,48 @@
+#include <iostream>
+using namespace std;
+
+const int MAX = 100;
+
+void leerVector(int v[], int n);
+void eliminarDuplicados(const int A[], int n, int B[], int &m);
+void mostrar(const int v[], int n);
+
+int main() {
+    int n, m;
+    int A[MAX], B[MAX];
+    cout << "Cantidad: ";
+    cin >> n;
+    if (n > 0 && n <= MAX) {
+        leerVector(A, n);
+        eliminarDuplicados(A, n, B, m);
+        mostrar(B, m);
+    }
+    return 0;
+}
+
+void leerVector(int v[], int n) {
+    for (int i = 0; i < n; i++) {
+        cout << "A[" << i << "]: ";
+        cin >> v[i];
+    }
+}
+
+void eliminarDuplicados(const int A[], int n, int B[], int &m) {
+    m = 0;
+    for (int i = 0; i < n; i++) {
+        bool existe = false;
+        for (int j = 0; j < m; j++) {
+            if (B[j] == A[i]) {
+                existe = true;
+                break;
+            }
+        }
+        if (!existe) B[m++] = A[i];
+    }
+}
+
+void mostrar(const int v[], int n) {
+    cout << "Vector sin duplicados (" << n << " elementos): ";
+    for (int i = 0; i < n; i++) cout << v[i] << " ";
+    cout << "\n";
+}
