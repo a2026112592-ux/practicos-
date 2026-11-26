@@ -1,0 +1,41 @@
+#include <iostream>
+using namespace std;
+
+const int MAX = 100;
+
+int leerN();
+void generarFibonacci(unsigned long long fib[], int n);
+void mostrar(const unsigned long long fib[], int n);
+
+int main() {
+    int n = leerN();
+    unsigned long long fib[MAX];
+    if (n > 0 && n <= MAX) {
+        generarFibonacci(fib, n);
+        mostrar(fib, n);
+    } else {
+        cout << "N debe ser > 0 y <= " << MAX << "\n";
+    }
+    return 0;
+}
+
+int leerN() {
+    int n;
+    cout << "Cantidad de terminos de Fibonacci: ";
+    cin >> n;
+    return n;
+}
+
+void generarFibonacci(unsigned long long fib[], int n) {
+    if (n >= 1) fib[0] = 0;
+    if (n >= 2) fib[1] = 1;
+    for (int i = 2; i < n; i++) {
+        fib[i] = fib[i - 1] + fib[i - 2];
+    }
+}
+
+void mostrar(const unsigned long long fib[], int n) {
+    cout << "Serie de Fibonacci (" << n << " terminos): ";
+    for (int i = 0; i < n; i++) cout << fib[i] << " ";
+    cout << "\n";
+}
