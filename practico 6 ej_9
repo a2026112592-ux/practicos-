@@ -1,0 +1,61 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+const double PI = 3.141592653589793;
+
+double areaCuadrado(double lado) {
+    return lado * lado;
+}
+
+double areaCirculo(double radio) {
+    return PI * pow(radio, 2);
+}
+
+double areaTriangulo(double base, double altura) {
+    return (base * altura) / 2.0;
+}
+
+int main() {
+    int opcion;
+    do {
+        cout << "\n--- MENU DE AREAS ---" << endl;
+        cout << "1. Cuadrado" << endl;
+        cout << "2. Circulo" << endl;
+        cout << "3. Triangulo" << endl;
+        cout << "4. Salir" << endl;
+        cout << "Seleccione una opcion: ";
+        cin >> opcion;
+
+        switch (opcion) {
+            case 1: {
+                double l;
+                cout << "Ingrese el lado: ";
+                cin >> l;
+                cout << "Area del cuadrado: " << areaCuadrado(l) << endl;
+                break;
+            }
+            case 2: {
+                double r;
+                cout << "Ingrese el radio: ";
+                cin >> r;
+                cout << "Area del circulo: " << areaCirculo(r) << endl;
+                break;
+            }
+            case 3: {
+                double b, h;
+                cout << "Ingrese la base y la altura: ";
+                cin >> b >> h;
+                cout << "Area del triangulo: " << areaTriangulo(b, h) << endl;
+                break;
+            }
+            case 4:
+                cout << "Saliendo..." << endl;
+                break;
+            default:
+                cout << "Opcion invalida." << endl;
+        }
+    } while (opcion != 4);
+
+    return 0;
+}
