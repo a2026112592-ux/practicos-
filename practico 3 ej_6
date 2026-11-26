@@ -1,0 +1,22 @@
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    int a, b;
+
+    cout << "Ingrese el valor de A: ";
+    cin >> a;
+    cout << "Ingrese el valor de B: ";
+    cin >> b;
+
+    int aux = a;
+    a = b;
+    b = aux;
+
+    cout << "\nDespues del intercambio:" << endl;
+    cout << "A = " << a << endl;
+    cout << "B = " << b << endl;
+
+    return 0;
+}
