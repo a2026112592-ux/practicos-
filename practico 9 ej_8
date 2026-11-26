@@ -1,0 +1,26 @@
+// Ejercicio 8: Consulta exacta por marca usando compare()
+void buscarPorMarca(const string productos[], const string marcas[], const int cantidades[], int total) {
+    if (total == 0) {
+        cout << "El inventario esta vacio.\n";
+        return;
+    }
+
+    string marcaBuscada;
+    cout << "Ingrese la marca exacta a consultar: ";
+    getline(cin, marcaBuscada);
+
+    int contador = 0;
+    cout << "\n--- PRODUCTOS DE LA MARCA: " << marcaBuscada << " ---\n";
+    for (int i = 0; i < total; i++) {
+        if (marcas[i].compare(marcaBuscada) == 0) {
+            cout << "[" << i << "] " << productos[i] << " - Cantidad: " << cantidades[i] << "\n";
+            contador++;
+        }
+    }
+
+    if (contador == 0) {
+        cout << "No existen productos registrados para la marca '" << marcaBuscada << "'.\n";
+    } else {
+        cout << "Total de coincidencias: " << contador << "\n";
+    }
+}
