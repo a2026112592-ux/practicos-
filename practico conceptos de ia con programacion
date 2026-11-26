@@ -1,0 +1,182 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+void registrarSecuencia(string &texto);
+int localizarLetra(string texto, string buscado);
+int contarRepeticiones(string texto, char buscado);
+int calcularFrecuencias(string texto, char unicos[], int conteos[]);
+void mostrarMasFrecuentes(char unicos[], int conteos[], int totalUnicos);
+void mostrarReporte(string texto, char unicos[], int conteos[], int totalUnicos);
+
+int main() {
+    string texto = "";
+    char unicos[100];
+    int conteos[100];
+    int opcion;
+    string buscadoStr;
+    char buscadoChar;
+
+    do {
+        cout << endl;
+        cout << "=== ANALIZADOR DE CARACTERES CON STRING (GRUPO 3) ===" << endl;
+        cout << "1. Registrar secuencia o frase" << endl;
+        cout << "2. Localizar posicion de letra o texto" << endl;
+        cout << "3. Contar repeticiones de un caracter" << endl;
+        cout << "4. Mostrar caracteres mas frecuentes" << endl;
+        cout << "5. Mostrar reporte general" << endl;
+        cout << "6. Salir" << endl;
+        cout << "Seleccione una opcion: ";
+        cin >> opcion;
+
+        switch (opcion) {
+            case 1:
+                registrarSecuencia(texto);
+                break;
+
+            case 2:
+                if (texto.empty()) {
+                    cout << "Primero debe registrar una secuencia (Opcion 1)." << endl;
+                } else {
+                    cout << "Ingrese la letra o texto a buscar: ";
+                    cin >> buscadoStr;
+                    int pos = localizarLetra(texto, buscadoStr);
+                    if (pos != -1) {
+                        cout << "Encontrado por primera vez en la posicion [" << pos << "]." << endl;
+                    } else {
+                        cout << "No se encontro en la secuencia." << endl;
+                    }
+                }
+                break;
+
+            case 3:
+                if (texto.empty()) {
+                    cout << "Primero debe registrar una secuencia (Opcion 1)." << endl;
+                } else {
+                    cout << "Ingrese el caracter a contar: ";
+                    cin >> buscadoChar;
+                    int veces = contarRepeticiones(texto, buscadoChar);
+                    cout << "El caracter '" << buscadoChar << "' aparece " << veces << " veces." << endl;
+                }
+                break;
+
+            case 4:
+                if (texto.empty()) {
+                    cout << "Primero debe registrar una secuencia (Opcion 1)." << endl;
+                } else {
+                    int totalUnicos = calcularFrecuencias(texto, unicos, conteos);
+                    mostrarMasFrecuentes(unicos, conteos, totalUnicos);
+                }
+                break;
+
+            case 5:
+                if (texto.empty()) {
+                    cout << "Primero debe registrar una secuencia (Opcion 1)." << endl;
+                } else {
+                    int totalUnicos = calcularFrecuencias(texto, unicos, conteos);
+                    mostrarReporte(texto, unicos, conteos, totalUnicos);
+                }
+                break;
+
+            case 6:
+                cout << "Saliendo del programa..." << endl;
+                break;
+
+            default:
+                cout << "Opcion no valida. Intente de nuevo." << endl;
+                break;
+        }
+    } while (opcion != 6);
+
+    return 0;
+}
+
+void registrarSecuencia(string &texto) {
+    cin.ignore();
+    do {
+        cout << "Ingrese la secuencia de caracteres (maximo 100): ";
+        getline(cin, texto);
+
+        if (texto.empty() || texto.length() > 100) {
+            cout << "Error: la secuencia no puede estar vacia ni superar 100 caracteres." << endl;
+        }
+    } while (texto.empty() || texto.length() > 100);
+
+    cout << "Secuencia registrada correctamente (" << texto.length() << " caracteres)." << endl;
+}
+
+int localizarLetra(string texto, string buscado) {
+    size_t pos = texto.find(buscado);
+    if (pos != string::npos) {
+        return pos;
+    }
+    return -1;
+}
+
+int contarRepeticiones(string texto, char buscado) {
+    int contador = 0;
+    for (int i = 0; i < texto.length(); i = i + 1) {
+        if (texto[i] == buscado) {
+            contador = contador + 1;
+        }
+    }
+    return contador;
+}
+
+int calcularFrecuencias(string texto, char unicos[], int conteos[]) {
+    int totalUnicos = 0;
+
+    for (int i = 0; i < texto.length(); i = i + 1) {
+        int pos = -1;
+        for (int j = 0; j < totalUnicos; j = j + 1) {
+            if (unicos[j] == texto[i]) {
+                pos = j;
+            }
+        }
+
+        if (pos != -1) {
+            conteos[pos] = conteos[pos] + 1;
+        } else {
+            unicos[totalUnicos] = texto[i];
+            conteos[totalUnicos] = 1;
+            totalUnicos = totalUnicos + 1;
+        }
+    }
+
+    return totalUnicos;
+}
+
+void mostrarMasFrecuentes(char unicos[], int conteos[], int totalUnicos) {
+    int maximo = conteos[0];
+
+    for (int i = 1; i < totalUnicos; i = i + 1) {
+        if (conteos[i] > maximo) {
+            maximo = conteos[i];
+        }
+    }
+
+    cout << "Frecuencia maxima encontrada: " << maximo << " repeticiones." << endl;
+    cout << "Caracter(es) mas frecuente(s): ";
+    for (int i = 0; i < totalUnicos; i = i + 1) {
+        if (conteos[i] == maximo) {
+            cout << "'" << unicos[i] << "' ";
+        }
+    }
+    cout << endl;
+}
+
+void mostrarReporte(string texto, char unicos[], int conteos[], int totalUnicos) {
+    cout << endl;
+    cout << "=== REPORTE GENERAL DE ANALISIS ===" << endl;
+    cout << "Secuencia analizada: " << texto << endl;
+    cout << "Total de caracteres (length): " << texto.length() << endl;
+    cout << "Total de caracteres distintos: " << totalUnicos << endl;
+    cout << "Tabla de frecuencias:" << endl;
+
+    for (int i = 0; i < totalUnicos; i = i + 1) {
+        cout << "  - Caracter '" << unicos[i] << "': " << conteos[i] << " veces" << endl;
+    }
+
+    mostrarMasFrecuentes(unicos, conteos, totalUnicos);
+}
