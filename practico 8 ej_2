@@ -1,0 +1,21 @@
+#include <iostream>
+using namespace std;
+const int MAX = 100;
+void leerVector(double v[], int n);
+double buscarMinimo(const double v[], int n);
+void mostrar(double minimo);
+int main() {
+int n; double v[MAX];
+cout<<"Cantidad de elementos: "; cin>>n;
+if(n>0 && n<=MAX) { leerVector(v, n); mostrar(buscarMinimo(v, n)); }
+return 0;
+}
+void leerVector(double v[], int n) {
+for(int i=0; i<n; i++){ cout<<"v["<<i<<"]: "; cin>>v[i]; }
+}
+double buscarMinimo(const double v[], int n) {
+double m = v[0];
+for(int i=1; i<n; i++) if(v[i]<m) m=v[i];
+return m;
+}
+void mostrar(double minimo) { cout<<"Minimo: "<<minimo<<"\n"; }
