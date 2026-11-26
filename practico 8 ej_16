@@ -1,0 +1,106 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+const int MAX = 100;
+
+int mostrarMenu();
+void registrar(string nom[], double nots[], int &n);
+void listar(const string nom[], const double nots[], int n);
+void ordenarAlfabeticamente(string nom[], double nots[], int n);
+void mostrarMejorNota(const string nom[], const double nots[], int n);
+void promedioNotas(const double nots[], int n);
+
+int main() {
+    string nombres[MAX];
+    double notas[MAX];
+    int n = 0, opcion;
+
+    do {
+        opcion = mostrarMenu();
+        switch (opcion) {
+            case 1: registrar(nombres, notas, n); break;
+            case 2: listar(nombres, notas, n); break;
+            case 3: ordenarAlfabeticamente(nombres, notas, n); break;
+            case 4: mostrarMejorNota(nombres, notas, n); break;
+            case 5: promedioNotas(notas, n); break;
+            case 6: cout << "Saliendo...\n"; break;
+            default: cout << "Opcion no valida.\n";
+        }
+    } while (opcion != 6);
+
+    return 0;
+}
+
+int mostrarMenu() {
+    int op;
+    cout << "\n--- MENU ---\n";
+    cout << "1) Registrar\n2) Listar\n3) Ordenar alfabeticamente\n4) Mostrar nota mas alta\n5) Promedio\n6) Salir\nOpcion: ";
+    cin >> op;
+    return op;
+}
+
+void registrar(string nom[], double nots[], int &n) {
+    if (n < MAX) {
+        cout << "Nombre: ";
+        cin >> nom[n];
+        do {
+            cout << "Nota: ";
+            cin >> nots[n];
+        } while (nots[n] < 0 || nots[n] > 100);
+        n++;
+    } else {
+        cout << "Arreglo lleno.\n";
+    }
+}
+
+void listar(const string nom[], const double nots[], int n) {
+    if (n == 0) {
+        cout << "Vacio.\n";
+        return;
+    }
+    for (int i = 0; i < n; i++) {
+        cout << nom[i] << " - " << nots[i] << "\n";
+    }
+}
+
+void ordenarAlfabeticamente(string nom[], double nots[], int n) {
+    if (n == 0) {
+        cout << "Vacio.\n";
+        return;
+    }
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (nom[j] > nom[j + 1]) {
+                swap(nom[j], nom[j + 1]);
+                swap(nots[j], nots[j + 1]);
+            }
+        }
+    }
+    cout << "Ordenado.\n";
+}
+
+void mostrarMejorNota(const string nom[], const double nots[], int n) {
+    if (n == 0) {
+        cout << "Vacio.\n";
+        return;
+    }
+    double max = nots[0];
+    for (int i = 1; i < n; i++) {
+        if (nots[i] > max) max = nots[i];
+    }
+    cout << "Mejor nota (" << max << ") obtenida por:\n";
+    for (int i = 0; i < n; i++) {
+        if (nots[i] == max) cout << "- " << nom[i] << "\n";
+    }
+}
+
+void promedioNotas(const double nots[], int n) {
+    if (n == 0) {
+        cout << "Vacio.\n";
+        return;
+    }
+    double sum = 0;
+    for (int i = 0; i < n; i++) sum += nots[i];
+    cout << "Promedio: " << sum / n << "\n";
+}
