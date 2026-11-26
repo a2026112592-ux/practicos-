@@ -1,0 +1,70 @@
+// Ejercicio 6: Localiza un producto con find() y suma unidades recibidas
+void reponerStock(string productos[], string marcas[], int cantidades[], int total) {
+    if (total == 0) {
+        cout << "El inventario esta vacio.\n";
+        return;
+    }
+
+    string busqueda;
+    cout << "Ingrese nombre (o fragmento) del producto a reponer: ";
+    getline(cin, busqueda);
+
+    if (busqueda.empty()) {
+        cout << "Error: Debe ingresar un texto de busqueda.\n";
+        return;
+    }
+
+    int coincidencias = 0;
+    int ultimoIdx = -1;
+    for (int i = 0; i < total; i++) {
+        if (productos[i].find(busqueda) != string::npos) {
+            cout << "[" << i << "] " << productos[i] << " (" << marcas[i]
+                 << ") - Stock actual: " << cantidades[i] << "\n";
+            coincidencias++;
+            ultimoIdx = i;
+        }
+    }
+
+    if (coincidencias == 0) {
+        cout << "No se encontro ningun producto coincidente.\n";
+        return;
+    }
+
+    int idx = ultimoIdx;
+    if (coincidencias > 1) {
+        cout << "Hay varias coincidencias. Ingrese el indice del producto a reponer: ";
+        if (!(cin >> idx)) {
+            cin.clear();
+            cin.ignore(10000, '\n');
+            cout << "Error: Indice invalido.\n";
+            return;
+        }
+        cin.ignore(10000, '\n');
+
+        if (idx < 0 || idx >= total || productos[idx].find(busqueda) == string::npos) {
+            cout << "Error: Indice fuera de rango o no corresponde a la busqueda.\n";
+            return;
+        }
+    }
+
+    int recibidas;
+    cout << "Unidades recibidas para '" << productos[idx] << "': ";
+    if (!(cin >> recibidas)) {
+        cin.clear();
+        cin.ignore(10000, '\n');
+        cout << "Error: Cantidad invalida.\n";
+        return;
+    }
+    cin.ignore(10000, '\n');
+
+    if (recibidas <= 0) {
+        cout << "Error: La reposicion debe ser positiva (> 0).\n";
+        return;
+    }
+
+    int anterior = cantidades[idx];
+    cantidades[idx] += recibidas;
+    cout << "Reposicion exitosa -> Anterior: " << anterior
+         << " | Recibida: " << recibidas
+         << " | Total: " << cantidades[idx] << " unidades.\n";
+}
