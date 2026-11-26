@@ -1,0 +1,35 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int leerNumero();
+string convertirALetras(int n, const string nombres[]);
+void mostrar(string letras);
+
+int main() {
+    string nombres[21] = {
+        "CERO", "UNO", "DOS", "TRES", "CUATRO", "CINCO", "SEIS", "SIETE", "OCHO", "NUEVE",
+        "DIEZ", "ONCE", "DOCE", "TRECE", "CATORCE", "QUINCE", "DIECISEIS", "DIECISIETE",
+        "DIECIOCHO", "DIECINUEVE", "VEINTE"
+    };
+    int n = leerNumero();
+    if (n >= 0 && n <= 20) {
+        mostrar(convertirALetras(n, nombres));
+    }
+    return 0;
+}
+
+int leerNumero() {
+    int n;
+    cout << "Ingrese un numero (0-20): ";
+    cin >> n;
+    return n;
+}
+
+string convertirALetras(int n, const string nombres[]) {
+    return nombres[n];
+}
+
+void mostrar(string letras) {
+    cout << "En letras: " << letras << "\n";
+}
