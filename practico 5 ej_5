@@ -1,0 +1,15 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n, complemento = 0, multiplicador = 1;
+    cin >> n;
+    while (n > 0) {
+        int digito = 9 - (n % 10);
+        complemento += digito * multiplicador;
+        multiplicador *= 10;
+        n /= 10;
+    }
+    cout << "Complemento a 9: " << complemento << endl;
+    return 0;
+}
