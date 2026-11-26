@@ -1,0 +1,119 @@
+// Ejercicio 9 (Submenú de edición de cadenas)
+void menuEdicionNombres(string productos[], string marcas[], int total) {
+    if (total == 0) {
+        cout << "El inventario esta vacio.\n";
+        return;
+    }
+
+    int op;
+    cout << "\n--- EDICION DE NOMBRES DE PRODUCTOS ---\n";
+    cout << "1. Sustituir un fragmento (find + replace)\n";
+    cout << "2. Agregar prefijo 'PRO-' (insert)\n";
+    cout << "3. Quitar prefijo 'PRO-' (erase)\n";
+    cout << "Seleccione una operacion: ";
+
+    if (!(cin >> op)) {
+        cin.clear();
+        cin.ignore(10000, '\n');
+        cout << "Opcion invalida.\n";
+        return;
+    }
+    cin.ignore(10000, '\n');
+
+    switch (op) {
+        case 1: corregirNombre(productos, marcas, total); break;
+        case 2: agregarPrefijo(productos, marcas, total); break;
+        case 3: quitarPrefijo(productos, marcas, total); break;
+        default: cout << "Operacion no valida.\n";
+    }
+}
+
+// Ejercicio 9a: Sustituye un fragmento verificando antes con find() y replace()
+void corregirNombre(string productos[], string marcas[], int total) {
+    string nom, mar;
+    cout << "Nombre exacto actual del producto: ";
+    getline(cin, nom);
+    cout << "Marca del producto: ";
+    getline(cin, mar);
+
+    int idx = buscarExacto(productos, marcas, total, nom, mar);
+    if (idx == -1) {
+        cout << "Producto no encontrado.\n";
+        return;
+    }
+
+    string fragmento, reemplazo;
+    cout << "Fragmento a sustituir: ";
+    getline(cin, fragmento);
+    cout << "Nuevo texto de reemplazo: ";
+    getline(cin, reemplazo);
+
+    if (fragmento.empty()) {
+        cout << "Error: El fragmento a buscar no puede estar vacio.\n";
+        return;
+    }
+
+    size_t pos = productos[idx].find(fragmento);
+    if (pos != string::npos) {
+        string antes = productos[idx];
+        string candidato = antes;
+        candidato.replace(pos, fragmento.length(), reemplazo);
+
+        if (candidato.length() < 3) {
+            cout << "Error: El nombre resultante tendria menos de 3 caracteres.\n";
+            return;
+        }
+
+        productos[idx] = candidato;
+        cout << "Correccion realizada -> Antes: " << antes << " | Despues: " << productos[idx] << "\n";
+    } else {
+        cout << "Error: No se encontro el fragmento '" << fragmento << "' en el nombre.\n";
+    }
+}
+
+// Ejercicio 9b: Inserta el prefijo "PRO-" con insert(0, "PRO-") evitando duplicados
+void agregarPrefijo(string productos[], string marcas[], int total) {
+    string nom, mar;
+    cout << "Nombre exacto del producto: ";
+    getline(cin, nom);
+    cout << "Marca del producto: ";
+    getline(cin, mar);
+
+    int idx = buscarExacto(productos, marcas, total, nom, mar);
+    if (idx == -1) {
+        cout << "Producto no encontrado.\n";
+        return;
+    }
+
+    if (productos[idx].find("PRO-") == 0) {
+        cout << "Aviso: El producto ya tiene el prefijo 'PRO-'. No se duplico.\n";
+        return;
+    }
+
+    string antes = productos[idx];
+    productos[idx].insert(0, "PRO-");
+    cout << "Prefijo agregado -> Antes: " << antes << " | Despues: " << productos[idx] << "\n";
+}
+
+// Ejercicio 9c: Elimina el prefijo "PRO-" con erase(0, 4) si existe
+void quitarPrefijo(string productos[], string marcas[], int total) {
+    string nom, mar;
+    cout << "Nombre exacto del producto (con prefijo PRO-): ";
+    getline(cin, nom);
+    cout << "Marca del producto: ";
+    getline(cin, mar);
+
+    int idx = buscarExacto(productos, marcas, total, nom, mar);
+    if (idx == -1) {
+        cout << "Producto no encontrado.\n";
+        return;
+    }
+
+    if (productos[idx].find("PRO-") == 0 && productos[idx].length() >= 4) {
+        string antes = productos[idx];
+        productos[idx].erase(0, 4);
+        cout << "Prefijo eliminado -> Antes: " << antes << " | Despues: " << productos[idx] << "\n";
+    } else {
+        cout << "Aviso: El producto no comienza con el prefijo 'PRO-'.\n";
+    }
+}
