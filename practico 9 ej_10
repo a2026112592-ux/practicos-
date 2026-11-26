@@ -1,0 +1,23 @@
+// Ejercicio 10: Resumen estadístico del inventario
+void mostrarResumen(const string productos[], const string marcas[], const int cantidades[], int total) {
+    if (total == 0) {
+        cout << "El inventario esta vacio. No hay datos para resumir.\n";
+        return;
+    }
+
+    int totalUnidades = 0;
+    int idxMayor = 0;
+
+    for (int i = 0; i < total; i++) {
+        totalUnidades += cantidades[i];
+        if (cantidades[i] > cantidades[idxMayor]) {
+            idxMayor = i;
+        }
+    }
+
+    cout << "\n--- RESUMEN DEL INVENTARIO ---\n";
+    cout << "Cantidad de productos distintos: " << total << "\n";
+    cout << "Total de unidades en stock:      " << totalUnidades << "\n";
+    cout << "Producto con mayor stock:        " << productos[idxMayor]
+         << " (" << marcas[idxMayor] << ") con " << cantidades[idxMayor] << " unidades.\n";
+}
