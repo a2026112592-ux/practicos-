@@ -1,0 +1,26 @@
+#include <iostream>
+using namespace std;
+
+// Función para calcular el factorial de un entero no negativo
+long long FAC(int n) {
+    if (n < 0) return -1; // Indicador de error
+    long long fact = 1;
+    for (int i = 1; i <= n; i++) {
+        fact *= i;
+    }
+    return fact;
+}
+
+int main() {
+    int n;
+    cout << "Ingrese un número entero no negativo: ";
+    cin >> n;
+
+    long long res = FAC(n);
+    if (res == -1) {
+        cout << "El factorial no está definido para números negativos." << endl;
+    } else {
+        cout << "FAC(" << n << ") = " << res << endl;
+    }
+    return 0;
+}
