@@ -1,0 +1,39 @@
+#include <iostream>
+using namespace std;
+
+const int MAX = 100;
+
+void leerVector(int v[], int n);
+bool esCapicua(const int v[], int n);
+void mostrar(bool capicua);
+
+int main() {
+    int n;
+    int v[MAX];
+    cout << "Cantidad de elementos: ";
+    cin >> n;
+    if (n > 0 && n <= MAX) {
+        leerVector(v, n);
+        mostrar(esCapicua(v, n));
+    }
+    return 0;
+}
+
+void leerVector(int v[], int n) {
+    for (int i = 0; i < n; i++) {
+        cout << "v[" << i << "]: ";
+        cin >> v[i];
+    }
+}
+
+bool esCapicua(const int v[], int n) {
+    for (int i = 0; i < n / 2; i++) {
+        if (v[i] != v[n - 1 - i]) return false;
+    }
+    return true;
+}
+
+void mostrar(bool capicua) {
+    if (capicua) cout << "El vector ES capicua.\n";
+    else cout << "El vector NO es capicua.\n";
+}
