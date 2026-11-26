@@ -1,0 +1,23 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n, digitos = 0, anterior = -1;
+    bool valido = true;
+    cin >> n;
+    while (n > 0) {
+        int d = n % 10;
+        if (d == anterior) {
+            valido = false;
+        }
+        anterior = d;
+        digitos++;
+        n /= 10;
+    }
+    if (valido && digitos == 4) {
+        cout << "PIN válido" << endl;
+    } else {
+        cout << "PIN inválido" << endl;
+    }
+    return 0;
+}
