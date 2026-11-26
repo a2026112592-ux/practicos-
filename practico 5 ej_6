@@ -1,0 +1,20 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n;
+    bool valido = true;
+    cin >> n;
+    while (n > 0) {
+        if (n % 10 >= 8) {
+            valido = false;
+        }
+        n /= 10;
+    }
+    if (valido) {
+        cout << "Válido en base 8" << endl;
+    } else {
+        cout << "Inválido en base 8" << endl;
+    }
+    return 0;
+}
