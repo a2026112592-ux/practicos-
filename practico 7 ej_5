@@ -1,0 +1,33 @@
+#include <iostream>
+using namespace std;
+
+
+void SISTEMA(double a, double b, double c, double d, double e, double f, double &x, double &y, bool &existe) {
+    double det = a * e - b * d;
+    if (det == 0) {
+        existe = false;
+    } else {
+        existe = true;
+        double c1 = -c;
+        double c2 = -f;
+        x = (c1 * e - b * c2) / det;
+        y = (a * c2 - c1 * d) / det;
+    }
+}
+
+int main() {
+    double x, y;
+    bool existe;
+
+   
+    SISTEMA(1, 2, 3, 4, 5, 6, x, y, existe);
+
+    if (existe) {
+        cout << "Solución del sistema:" << endl;
+        cout << "X = " << x << endl;
+        cout << "Y = " << y << endl;
+    } else {
+        cout << "El sistema no tiene solución única (determinante = 0)." << endl;
+    }
+    return 0;
+}
