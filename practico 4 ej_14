@@ -1,0 +1,20 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n;
+    cout << "Ingrese la posicion n (comenzando desde 0): ";
+    cin >> n;
+    if (n == 0 || n == 1) {
+        cout << "El numero de Fibonacci F(" << n << ") es: 1" << endl;
+        return 0;
+    }
+    long long f0 = 1, f1 = 1, fn = 0;
+    for (int i = 2; i <= n; i++) {
+        fn = f1 + f0;
+        f0 = f1;
+        f1 = fn;
+    }
+    cout << "El numero de Fibonacci F(" << n << ") es: " << fn << endl;
+    return 0;
+}
