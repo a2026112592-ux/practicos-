@@ -1,0 +1,56 @@
+// Ejercicio 2: Registra entre 1 y 20 productos evitando duplicados (empty, length, compare)
+void registrarProductos(string productos[], string marcas[], int cantidades[], int &total) {
+    if (total >= MAX) {
+        cout << "Error: Capacidad maxima alcanzada (" << MAX << " productos).\n";
+        return;
+    }
+
+    int disponibles = MAX - total;
+    int n;
+    cout << "Cuantos productos desea registrar? (1 - " << disponibles << "): ";
+    if (!(cin >> n)) {
+        cin.clear();
+        cin.ignore(10000, '\n');
+        cout << "Error: Cantidad invalida.\n";
+        return;
+    }
+    cin.ignore(10000, '\n');
+
+    if (n < 1 || n > disponibles) {
+        cout << "Error: El numero de registros debe estar entre 1 y " << disponibles << ".\n";
+        return;
+    }
+
+    for (int i = 0; i < n; i++) {
+        cout << "\n--- Producto " << (i + 1) << " de " << n << " ---\n";
+        string nom, mar;
+        int cant;
+
+        if (registrarProducto(nom, mar, cant)) {
+            if (buscarExacto(productos, marcas, total, nom, mar) != -1) {
+                cout << "Error: Ya existe '" << nom << "' de la marca '" << mar << "'. No se registro.\n";
+            } else {
+                productos[total] = nom;
+                marcas[total] = mar;
+                cantidades[total] = cant;
+                total++;
+                cout << "Registro exitoso en posicion [" << (total - 1) << "]:\n";
+                mostrarProducto(nom, mar, cant);
+            }
+        }
+    }
+}
+
+// Ejercicio 2: Muestra el listado completo de productos
+void mostrarProductos(const string productos[], const string marcas[], const int cantidades[], int total) {
+    if (total == 0) {
+        cout << "El inventario esta vacio.\n";
+        return;
+    }
+
+    cout << "\n--- LISTADO DE PRODUCTOS (" << total << "/" << MAX << ") ---\n";
+    for (int i = 0; i < total; i++) {
+        cout << "[" << i << "] ";
+        mostrarProducto(productos[i], marcas[i], cantidades[i]);
+    }
+}
