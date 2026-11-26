@@ -1,0 +1,43 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+void resolverTodosLosCasos(double a, double b, double c) {
+    if (a == 0) {
+        if (b == 0) {
+            if (c == 0) {
+                cout << "Infinitas soluciones (0 = 0)." << endl;
+            } else {
+                cout << "Sin solucion (inconsistencia)." << endl;
+            }
+        } else {
+            double x = -c / b;
+            cout << "Ecuacion lineal. Solucion unica: x = " << x << endl;
+        }
+    } else {
+        double disc = b * b - 4 * a * c;
+        if (disc > 0) {
+            double x1 = (-b + sqrt(disc)) / (2 * a);
+            double x2 = (-b - sqrt(disc)) / (2 * a);
+            cout << "Dos soluciones reales: x1 = " << x1 << ", x2 = " << x2 << endl;
+        } else if (disc == 0) {
+            double x = -b / (2 * a);
+            cout << "Solucion real unica (doble): x = " << x << endl;
+        } else {
+            double real = -b / (2 * a);
+            double imag = sqrt(-disc) / (2 * a);
+            cout << "Dos soluciones complejas conjugadas:" << endl;
+            cout << "x1 = " << real << " + " << imag << "i" << endl;
+            cout << "x2 = " << real << " - " << imag << "i" << endl;
+        }
+    }
+}
+
+int main() {
+    double a, b, c;
+    cout << "Ingrese a, b y c: ";
+    cin >> a >> b >> c;
+
+    resolverTodosLosCasos(a, b, c);
+    return 0;
+}
