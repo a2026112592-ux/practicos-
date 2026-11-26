@@ -1,0 +1,27 @@
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    int d1, m1, d2, m2;
+
+    cout << "Ingrese fecha inicial (DD MM): ";[cite: 1]
+    cin >> d1 >> m1;
+    cout << "Ingrese fecha final (DD MM): ";[cite: 1]
+    cin >> d2 >> m2;
+
+    int totalDias1 = (m1 - 1) * 30 + d1;
+    int totalDias2 = (m2 - 1) * 30 + d2;
+
+    int diferenciaDias = totalDias2 - totalDias1;
+
+    if (diferenciaDias < 0) {
+        cout << "La fecha final debe ser posterior a la fecha inicial." << endl;
+    } else {
+        int meses = diferenciaDias / 30;
+        int dias = diferenciaDias % 30;
+        cout << "Diferencia: " << meses << " meses " << dias << " dias" << endl;[cite: 1]
+    }
+
+    return 0;
+}
