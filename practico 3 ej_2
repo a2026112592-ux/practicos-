@@ -1,0 +1,22 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+int main() {
+    double radio, altura;
+    const double PI = 3.141592653589793;
+
+    cout << "Ingrese el radio del cilindro: ";
+    cin >> radio;
+    cout << "Ingrese la altura del cilindro: ";
+    cin >> altura;
+
+    double area = 2 * PI * radio * (radio + altura);
+    double volumen = PI * pow(radio, 2) * altura;
+
+    cout << "Area de la superficie: " << area << endl;
+    cout << "Volumen del cilindro: " << volumen << endl;
+
+    return 0;
+}
