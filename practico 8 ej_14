@@ -1,0 +1,48 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+const int MAX = 100;
+
+void leerVector(double v[], int n);
+void ordenarBurbuja(double A[], int n);
+void mostrar(const double v[], int n, string estado);
+
+int main() {
+    int n;
+    double A[MAX];
+    cout << "Cantidad: ";
+    cin >> n;
+    if (n > 0 && n <= MAX) {
+        leerVector(A, n);
+        mostrar(A, n, "Antes del ordenamiento");
+        ordenarBurbuja(A, n);
+        mostrar(A, n, "Despues del ordenamiento (Ascendente)");
+    }
+    return 0;
+}
+
+void leerVector(double v[], int n) {
+    for (int i = 0; i < n; i++) {
+        cout << "A[" << i << "]: ";
+        cin >> v[i];
+    }
+}
+
+void ordenarBurbuja(double A[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (A[j] > A[j + 1]) {
+                double temp = A[j];
+                A[j] = A[j + 1];
+                A[j + 1] = temp;
+            }
+        }
+    }
+}
+
+void mostrar(const double v[], int n, string estado) {
+    cout << estado << ": ";
+    for (int i = 0; i < n; i++) cout << v[i] << " ";
+    cout << "\n";
+}
