@@ -1,0 +1,17 @@
+Algoritmo sin_titulo
+    Definir nombre, carrera Como Cadena
+    Definir edad, semestre Como Entero
+    Escribir 'Ingrese el nombre completo del estudiante:'
+    Leer nombre
+    Escribir 'Ingrese la edad:'
+    Leer edad
+    Escribir 'Ingrese la carrera:'
+    Leer carrera
+    Escribir 'Ingrese el semestre:'
+    Leer semestre
+    Escribir 'Datos del estudiante'
+    Escribir 'Nombre completo: ', nombre
+    Escribir 'Edad: ', edad
+    Escribir 'Carrera: ', carrera
+    Escribir 'Semestre: ', semestre
+FinAlgoritmo
