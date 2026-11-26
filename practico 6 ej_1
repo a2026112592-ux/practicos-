@@ -1,0 +1,29 @@
+#include <iostream>
+using namespace std;
+
+double calcularCostoCarta(double peso) {
+    if (peso > 0 && peso <= 50) return 1.50;
+    else if (peso > 50 && peso <= 100) return 4.00;
+    else if (peso > 100 && peso <= 200) return 6.00;
+    else if (peso > 200 && peso <= 350) return 10.50;
+    else if (peso > 350 && peso <= 500) return 15.00;
+    else return -1; // Excede los 500g
+}
+
+int main() {
+    double peso;
+    cout << "Ingrese el peso de la carta en gramos: ";
+    cin >> peso;
+
+    if (peso <= 0) {
+        cout << "Peso invalido." << endl;
+    } else {
+        double costo = calcularCostoCarta(peso);
+        if (costo == -1) {
+            cout << "NO PUEDE ENVIAR COMO CARTA" << endl;
+        } else {
+            cout << "Costo de envio: Bs. " << costo << endl;
+        }
+    }
+    return 0;
+}
