@@ -1,0 +1,44 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+const int MAX = 100;
+
+void leerVector(int v[], int n);
+void invertir(int A[], int n);
+void mostrar(const int v[], int n, string estado);
+
+int main() {
+    int n;
+    int A[MAX];
+    cout << "Cantidad: ";
+    cin >> n;
+    if (n > 0 && n <= MAX) {
+        leerVector(A, n);
+        mostrar(A, n, "Antes de invertir");
+        invertir(A, n);
+        mostrar(A, n, "Despues de invertir");
+    }
+    return 0;
+}
+
+void leerVector(int v[], int n) {
+    for (int i = 0; i < n; i++) {
+        cout << "A[" << i << "]: ";
+        cin >> v[i];
+    }
+}
+
+void invertir(int A[], int n) {
+    for (int i = 0; i < n / 2; i++) {
+        int temp = A[i];
+        A[i] = A[n - 1 - i];
+        A[n - 1 - i] = temp;
+    }
+}
+
+void mostrar(const int v[], int n, string estado) {
+    cout << estado << ": ";
+    for (int i = 0; i < n; i++) cout << v[i] << " ";
+    cout << "\n";
+}
