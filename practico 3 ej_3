@@ -1,0 +1,19 @@
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    int totalSegundos;
+
+    cout << "Ingrese el tiempo total en segundos: ";
+    cin >> totalSegundos;
+
+    int horas = totalSegundos / 3600;
+    int residuo = totalSegundos % 3600;
+    int minutos = residuo / 60;
+    int segundos = residuo % 60;
+
+    cout << horas << " horas, " << minutos << " minutos, " << segundos << " segundos." << endl;
+
+    return 0;
+}
