@@ -1,0 +1,39 @@
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+double calcularParcial(int cantidad, double precio) {
+    return cantidad * precio;
+}
+
+int main() {
+    int cHamb, cQueso, cPapas, cSoda;
+
+    cout << "Cantidad de Hamburguesas (3 Bs): ";
+    cin >> cHamb;
+    cout << "Cantidad de Hamburguesas con queso (5 Bs): ";
+    cin >> cQueso;
+    cout << "Cantidad de Papas fritas (2 Bs): ";
+    cin >> cPapas;
+    cout << "Cantidad de Soda (2.5 Bs): ";
+    cin >> cSoda;
+
+    double pHamb = calcularParcial(cHamb, 3.0);
+    double pQueso = calcularParcial(cQueso, 5.0);
+    double pPapas = calcularParcial(cPapas, 2.0);
+    double pSoda = calcularParcial(cSoda, 2.5);
+
+    int totalCant = cHamb + cQueso + cPapas + cSoda;
+    double totalPagar = pHamb + pQueso + pPapas + pSoda;
+
+    cout << fixed << setprecision(2);
+    cout << "\nITEM                           CANTIDAD   TOTAL PARCIAL" << endl;
+    cout << "Hamburguesas (3Bs)             " << setw(8) << cHamb << "   " << setw(13) << pHamb << endl;
+    cout << "Hamburguesas con queso (5Bs)   " << setw(8) << cQueso << "   " << setw(13) << pQueso << endl;
+    cout << "Papas fritas (2Bs)             " << setw(8) << cPapas << "   " << setw(13) << pPapas << endl;
+    cout << "Soda (2.5Bs)                   " << setw(8) << cSoda << "   " << setw(13) << pSoda << endl;
+    cout << "-------------------------------------------------------" << endl;
+    cout << "T O T A L                      " << setw(8) << totalCant << "   " << setw(13) << totalPagar << endl;
+
+    return 0;
+}
