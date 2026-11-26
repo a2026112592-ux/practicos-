@@ -1,0 +1,32 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+void resolverCuadraticaReal(double a, double b, double c) {
+    if (a == 0) {
+        cout << "No es una ecuacion cuadratica (a debe ser distinto de 0)." << endl;
+        return;
+    }
+
+    double d = b * b - 4 * a * c;
+
+    if (d > 0) {
+        double x1 = (-b + sqrt(d)) / (2 * a);
+        double x2 = (-b - sqrt(d)) / (2 * a);
+        cout << "Soluciones reales: x1 = " << x1 << ", x2 = " << x2 << endl;
+    } else if (d == 0) {
+        double x = -b / (2 * a);
+        cout << "Solucion real unica: x = " << x << endl;
+    } else {
+        cout << "No existen soluciones reales." << endl;
+    }
+}
+
+int main() {
+    double a, b, c;
+    cout << "Ingrese los coeficientes a, b y c: ";
+    cin >> a >> b >> c;
+
+    resolverCuadraticaReal(a, b, c);
+    return 0;
+}
