@@ -1,0 +1,27 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+void LITERAL(int dia, int mes, int anio) {
+    string meses[] = {
+        "", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+        "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+    };
+
+    int anioCompleto = anio;
+    if (anio < 100) {
+        anioCompleto = (anio >= 50) ? (1900 + anio) : (2000 + anio);
+    }
+
+    if (mes >= 1 && mes <= 12) {
+        cout << dia << " de " << meses[mes] << " de " << anioCompleto << endl;
+    } else {
+        cout << "Mes no válido" << endl;
+    }
+}
+
+int main() {
+    cout << "Resultado LITERAL(20, 5, 99): ";
+    LITERAL(20, 5, 99);
+    return 0;
+}
