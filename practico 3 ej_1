@@ -1,0 +1,25 @@
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    char respuesta;
+
+    cout << "=== PREPARAR UNA TAZA DE TE ===" << endl;
+    cout << "1. Poner a calentar agua en la caldera." << endl;
+    cout << "2. Sirviendo el agua caliente en la taza..." << endl;
+    cout << "3. Colocando la saqueta de te." << endl;
+
+    cout << "\n¿Desea agregar azucar? (s/n): ";
+    cin >> respuesta;
+
+    if (respuesta == 's' || respuesta == 'S') {
+        cout << "4. Agregar azucar y mezclar." << endl;
+    } else {
+        cout << "4. Servir sin azucar." << endl;
+    }
+
+    cout << "\n¡El te esta listo para tomar!" << endl;
+
+    return 0;
+}
