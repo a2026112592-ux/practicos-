@@ -1,0 +1,22 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n, valor_limite, suma = 0, pares = 0;
+    cout << "Ingrese numero y valor limite de suma: ";
+    cin >> n >> valor_limite;
+    while (n > 0) {
+        int d = n % 10;
+        suma += d;
+        if (d % 2 == 0) {
+            pares++;
+        }
+        n /= 10;
+    }
+    if (pares >= 2 && suma > valor_limite) {
+        cout << "Código seguro" << endl;
+    } else {
+        cout << "Código inseguro" << endl;
+    }
+    return 0;
+}
