@@ -1,0 +1,21 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+// Función para calcular la potencia x^y
+double POTEN(double x, double y) {
+    return pow(x, y);
+}
+
+int main() {
+    double base, exponente;
+    cout << "--- CALCULADORA DE POTENCIA ---" << endl;
+    cout << "Ingrese la base (x): ";
+    cin >> base;
+    cout << "Ingrese el exponente (y): ";
+    cin >> exponente;
+
+    double resultado = POTEN(base, exponente);
+    cout << base << " elevado a la " << exponente << " es: " << resultado << endl;
+    return 0;
+}
