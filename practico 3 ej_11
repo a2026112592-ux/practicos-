@@ -1,0 +1,24 @@
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    double kwh;
+
+    cout << "Ingrese el consumo mensual en kWh: ";[cite: 1]
+    cin >> kwh;
+
+    double total = 0.0;
+
+    if (kwh <= 100) {
+        total = kwh * 0.80;
+    } else if (kwh <= 300) {
+        total = (100 * 0.80) + ((kwh - 100) * 1.20);
+    } else {
+        total = (100 * 0.80) + (200 * 1.20) + ((kwh - 300) * 1.80);
+    }
+
+    cout << "El monto total a pagar es: " << total << " BS" << endl;
+
+    return 0;
+}
