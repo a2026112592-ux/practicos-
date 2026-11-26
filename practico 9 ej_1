@@ -1,0 +1,146 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+const int MAX = 20;
+
+// --- PROTOTIPOS DE FUNCIONES ---
+int mostrarMenu();
+bool registrarProducto(string &nombre, string &marca, int &cantidad);
+void mostrarProducto(string nombre, string marca, int cantidad);
+void registrarProductos(string productos[], string marcas[], int cantidades[], int &total);
+void mostrarProductos(const string productos[], const string marcas[], const int cantidades[], int total);
+void buscarProductos(const string productos[], const string marcas[], const int cantidades[], int total);
+int buscarExacto(const string productos[], const string marcas[], int total, string nombreBuscado, string marcaBuscada);
+void actualizarStock(string productos[], string marcas[], int cantidades[], int total);
+void registrarVenta(string productos[], string marcas[], int cantidades[], int total);
+void reponerStock(string productos[], string marcas[], int cantidades[], int total);
+string generarCodigo(string nombre);
+void mostrarStockBajo(const string productos[], const string marcas[], const int cantidades[], int total);
+void buscarPorMarca(const string productos[], const string marcas[], const int cantidades[], int total);
+void menuEdicionNombres(string productos[], string marcas[], int total);
+void corregirNombre(string productos[], string marcas[], int total);
+void agregarPrefijo(string productos[], string marcas[], int total);
+void quitarPrefijo(string productos[], string marcas[], int total);
+void mostrarResumen(const string productos[], const string marcas[], const int cantidades[], int total);
+
+// --- FUNCIÓN PRINCIPAL ---
+int main() {
+    string productos[MAX];
+    string marcas[MAX];
+    int cantidades[MAX];
+    int total = 0;
+    int opcion;
+
+    do {
+        opcion = mostrarMenu();
+
+        switch (opcion) {
+            case 1:
+                registrarProductos(productos, marcas, cantidades, total);
+                break;
+            case 2:
+                mostrarProductos(productos, marcas, cantidades, total);
+                break;
+            case 3:
+                buscarProductos(productos, marcas, cantidades, total);
+                break;
+            case 4:
+                actualizarStock(productos, marcas, cantidades, total);
+                break;
+            case 5:
+                registrarVenta(productos, marcas, cantidades, total);
+                break;
+            case 6:
+                reponerStock(productos, marcas, cantidades, total);
+                break;
+            case 7:
+                mostrarStockBajo(productos, marcas, cantidades, total);
+                break;
+            case 8:
+                buscarPorMarca(productos, marcas, cantidades, total);
+                break;
+            case 9:
+                menuEdicionNombres(productos, marcas, total);
+                break;
+            case 10:
+                mostrarResumen(productos, marcas, cantidades, total);
+                break;
+            case 0:
+                cout << "Saliendo del sistema de inventario...\n";
+                break;
+            default:
+                cout << "Opcion no valida. Intente nuevamente.\n";
+        }
+    } while (opcion != 0);
+
+    return 0;
+}
+
+// --- DEFINICIÓN DE FUNCIONES ---
+
+int mostrarMenu() {
+    int op;
+    cout << "\n============================================\n";
+    cout << "     SISTEMA DE GESTION DE INVENTARIO\n";
+    cout << "============================================\n";
+    cout << "1. Registrar producto(s) (Ej. 1 y 2)\n";
+    cout << "2. Mostrar listado de productos (Ej. 2)\n";
+    cout << "3. Buscar producto por nombre parcial (Ej. 3)\n";
+    cout << "4. Actualizar stock de un producto (Ej. 4)\n";
+    cout << "5. Registrar una venta (Ej. 5)\n";
+    cout << "6. Reponer existencias (Ej. 6)\n";
+    cout << "7. Alertas de stock bajo y codigos (Ej. 7)\n";
+    cout << "8. Consultar productos por marca (Ej. 8)\n";
+    cout << "9. Corregir o editar nombres (Ej. 9)\n";
+    cout << "10. Mostrar resumen del inventario (Ej. 10)\n";
+    cout << "0. Salir\n";
+    cout << "Seleccione una opcion: ";
+
+    while (!(cin >> op)) {
+        cin.clear();
+        cin.ignore(10000, '\n');
+        cout << "Entrada invalida. Ingrese un numero: ";
+    }
+    cin.ignore(10000, '\n');
+    return op;
+}
+
+// Ejercicio 1: Solicita y valida datos de un producto por referencia (empty, length)
+bool registrarProducto(string &nombre, string &marca, int &cantidad) {
+    cout << "Nombre del producto (min. 3 caracteres): ";
+    getline(cin, nombre);
+    if (nombre.empty() || nombre.length() < 3) {
+        cout << "Error: El nombre no puede estar vacio y debe tener al menos 3 caracteres.\n";
+        return false;
+    }
+
+    cout << "Marca del producto (min. 3 caracteres): ";
+    getline(cin, marca);
+    if (marca.empty() || marca.length() < 3) {
+        cout << "Error: La marca no puede estar vacia y debe tener al menos 3 caracteres.\n";
+        return false;
+    }
+
+    cout << "Cantidad disponible (>= 0): ";
+    if (!(cin >> cantidad)) {
+        cin.clear();
+        cin.ignore(10000, '\n');
+        cout << "Error: Debe ingresar un numero entero.\n";
+        return false;
+    }
+    cin.ignore(10000, '\n');
+
+    if (cantidad < 0) {
+        cout << "Error: La cantidad no puede ser negativa.\n";
+        return false;
+    }
+
+    return true;
+}
+
+// Ejercicio 1: Muestra la información de un único producto
+void mostrarProducto(string nombre, string marca, int cantidad) {
+    cout << "  Producto: " << nombre << " | Marca: " << marca << " | Stock: " << cantidad << "\n";
+}
