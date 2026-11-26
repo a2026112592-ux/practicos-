@@ -1,0 +1,22 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n, total = 0, apps = 0, superan5 = 0;
+    cin >> n;
+    while (n > 0) {
+        int h = n % 10;
+        total += h;
+        apps++;
+        if (h > 5) {
+            superan5++;
+        }
+        n /= 10;
+    }
+    cout << "Total horas: " << total << endl;
+    cout << "Apps > 5 horas: " << superan5 << endl;
+    if (apps > 0) {
+        cout << "Promedio: " << (float)total / apps << " horas" << endl;
+    }
+    return 0;
+}
