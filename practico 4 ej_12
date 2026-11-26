@@ -1,0 +1,21 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main() {
+    int a, b;
+    cout << "Ingrese el primer número: ";
+    cin >> a;
+    cout << "Ingrese el segundo número: ";
+    cin >> b;
+    int temp_a = a, temp_b = b;
+    while (temp_b != 0) {
+        int residuo = temp_a % temp_b;
+        temp_a = temp_b;
+        temp_b = residuo;
+    }
+    int mcd = temp_a;
+    int mcm = abs(a * b) / mcd;
+    cout << "El MCM de " << a << " y " << b << " es: " << mcm << endl;
+    return 0;
+}
