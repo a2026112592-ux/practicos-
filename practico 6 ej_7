@@ -1,0 +1,34 @@
+#include <iostream>
+using namespace std;
+
+void resolverSistema(double a, double b, double c, double d, double e, double f) {
+    double det = a * e - b * d;
+    double detX = c * e - b * f;
+    double detY = a * f - c * d;
+
+    if (det != 0) {
+        double x = detX / det;
+        double y = detY / det;
+        cout << "Tipo 1 - Solucion unica (Compatible Determinado):" << endl;
+        cout << "X = " << x << ", Y = " << y << endl;
+    } else {
+        if (detX == 0 && detY == 0) {
+            cout << "Tipo 2 - Infinitas soluciones (Compatible Indeterminado)." << endl;
+        } else {
+            cout << "Tipo 3 - Sin solucion (Incompatible, rectas paralelas)." << endl;
+        }
+    }
+}
+
+int main() {
+    double a, b, c, d, e, f;
+    cout << "Sistema:\n  aX + bY = c\n  dX + eY = f\n";
+    cout << "Ingrese a, b, c: ";
+    cin >> a >> b >> c;
+    cout << "Ingrese d, e, f: ";
+    cin >> d >> e >> f;
+
+    resolverSistema(a, b, c, d, e, f);
+    cout << "\nExisten 3 tipos de soluciones posibles: solucion unica, infinitas soluciones y sin solucion." << endl;
+    return 0;
+}
