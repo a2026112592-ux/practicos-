@@ -1,0 +1,42 @@
+#include <iostream>
+using namespace std;
+
+const int MAX = 100;
+
+void leerVector(double v[], int n);
+void promediosConsecutivos(const double A[], double B[], int n, int &m);
+void mostrar(const double B[], int m);
+
+int main() {
+    int n, m;
+    double A[MAX], B[MAX];
+    cout << "Cantidad de elementos (>=3): ";
+    cin >> n;
+    if (n >= 3 && n <= MAX) {
+        leerVector(A, n);
+        promediosConsecutivos(A, B, n, m);
+        mostrar(B, m);
+    }
+    return 0;
+}
+
+void leerVector(double v[], int n) {
+    for (int i = 0; i < n; i++) {
+        cout << "A[" << i << "]: ";
+        cin >> v[i];
+    }
+}
+
+void promediosConsecutivos(const double A[], double B[], int n, int &m) {
+    m = n - 2;
+    for (int i = 0; i < m; i++) {
+        B[i] = (A[i] + A[i + 1] + A[i + 2]) / 3.0;
+    }
+}
+
+void mostrar(const double B[], int m) {
+    cout << "Vector de Promedios:\n";
+    for (int i = 0; i < m; i++) {
+        cout << "P" << i + 1 << ": " << B[i] << "\n";
+    }
+}
