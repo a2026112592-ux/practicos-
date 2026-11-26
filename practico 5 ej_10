@@ -1,0 +1,18 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n, acumulado = 0, mayores_a_5 = 0;
+    cin >> n;
+    while (n > 0) {
+        int d = n % 10;
+        acumulado += d;
+        if (d > 5) {
+            mayores_a_5++;
+        }
+        n /= 10;
+    }
+    cout << "Total acumulado: " << acumulado << endl;
+    cout << "Transacciones > 5: " << mayores_a_5 << endl;
+    return 0;
+}
