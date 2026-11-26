@@ -1,0 +1,23 @@
+#include <iostream>
+#include <string>
+#include <cmath>
+using namespace std;
+
+long long binarioADecimal(string binario) {
+    long long decimal = 0;
+    int len = binario.length();
+    for (int i = 0; i < len; i++) {
+        if (binario[len - 1 - i] == '1') {
+            decimal += pow(2, i);
+        }
+    }
+    return decimal;
+}
+
+int main() {
+    string x;
+    cout << "Ingrese un valor binario X: ";
+    cin >> x;
+    cout << "Equivalente decimal: " << binarioADecimal(x) << endl;
+    return 0;
+}
