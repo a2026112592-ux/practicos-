@@ -1,0 +1,36 @@
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    double ingresoNeto, minimoNoImponible, facturaPresentada;
+
+    cout << "Ingrese el ingreso neto mensual (BS): ";
+    cin >> ingresoNeto;
+    cout << "Ingrese el monto en facturas presentadas (Formulario 110) en BS: ";
+    cin >> facturaPresentada;
+
+    // El minimo no imponible equivale habitualmente a 2 Salarios Minimos Nacionales
+    // Ejemplo ilustrativo con un minimo exento base:
+    minimoNoImponible = 5000.0;
+
+    double baseImponible = ingresoNeto - minimoNoImponible;
+
+    if (baseImponible <= 0) {
+        cout << "No esta sujeto a retencion del impuesto RC-IVA." << endl;
+    } else {
+        double impuestoCalculado = baseImponible * 0.13;
+        double creditoFiscal = facturaPresentada * 0.13;
+        double impuestoAPagar = impuestoCalculado - creditoFiscal;
+
+        if (impuestoAPagar < 0) {
+            impuestoAPagar = 0;
+        }
+
+        cout << "Impuesto calculado (13%): " << impuestoCalculado << " BS" << endl;
+        cout << "Credito fiscal por facturas: " << creditoFiscal << " BS" << endl;
+        cout << "Monto final a pagar de RC-IVA: " << impuestoAPagar << " BS" << endl;
+    }
+
+    return 0;
+}
