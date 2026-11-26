@@ -1,0 +1,44 @@
+#include <iostream>
+using namespace std;
+
+double calcularNotaFinal(double p1, double p2, double practico, double exFinal, int faltas) {
+    double limiteFaltas = 48 * 0.20; // 9.6 clases
+    if (faltas > limiteFaltas) {
+        exFinal = 0;
+    }
+    double promParciales = (p1 + p2) / 2.0;
+    return (promParciales * 0.40) + (practico * 0.20) + (exFinal * 0.40);
+}
+
+int main() {
+    char continuar;
+    do {
+        double p1, p2, practico, exFinal;
+        int faltas;
+
+        cout << "\nNota primer parcial (0-100): ";
+        cin >> p1;
+        cout << "Nota segundo parcial (0-100): ";
+        cin >> p2;
+        cout << "Nota examen practico (0-100): ";
+        cin >> practico;
+        cout << "Nota examen final (0-100): ";
+        cin >> exFinal;
+        cout << "Numero de faltas: ";
+        cin >> faltas;
+
+        double nf = calcularNotaFinal(p1, p2, practico, exFinal, faltas);
+        cout << "Promedio (Nota Final): " << nf << endl;
+
+        if (nf >= 51) {
+            cout << "Resultado: APROBADO" << endl;
+        } else {
+            cout << "Resultado: REPROBADO" << endl;
+        }
+
+        cout << "\n¿Hay mas alumnos? (s/n): ";
+        cin >> continuar;
+    } while (continuar == 's' || continuar == 'S');
+
+    return 0;
+}
