@@ -1,0 +1,45 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+const int MAX = 100;
+
+void leerVector(double v[], int n, string nombre);
+void concatenar(const double A[], int n, const double B[], int m, double C[], int &k);
+void mostrar(const double v[], int n, string nombre);
+
+int main() {
+    int n, m, k;
+    double A[MAX], B[MAX], C[2 * MAX];
+    cout << "Tamano A: ";
+    cin >> n;
+    leerVector(A, n, "A");
+    cout << "Tamano B: ";
+    cin >> m;
+    leerVector(B, m, "B");
+
+    concatenar(A, n, B, m, C, k);
+    mostrar(A, n, "A");
+    mostrar(B, m, "B");
+    mostrar(C, k, "C (Concatenado)");
+    return 0;
+}
+
+void leerVector(double v[], int n, string nombre) {
+    for (int i = 0; i < n; i++) {
+        cout << nombre << "[" << i << "]: ";
+        cin >> v[i];
+    }
+}
+
+void concatenar(const double A[], int n, const double B[], int m, double C[], int &k) {
+    k = 0;
+    for (int i = 0; i < n; i++) C[k++] = A[i];
+    for (int i = 0; i < m; i++) C[k++] = B[i];
+}
+
+void mostrar(const double v[], int n, string nombre) {
+    cout << nombre << ": ";
+    for (int i = 0; i < n; i++) cout << v[i] << " ";
+    cout << "\n";
+}
