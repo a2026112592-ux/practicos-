@@ -1,0 +1,48 @@
+// Ejercicio 4 (Auxiliar): Búsqueda exacta por nombre y marca usando compare()
+int buscarExacto(const string productos[], const string marcas[], int total, string nombreBuscado, string marcaBuscada) {
+    for (int i = 0; i < total; i++) {
+        if (productos[i].compare(nombreBuscado) == 0 && marcas[i].compare(marcaBuscada) == 0) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+// Ejercicio 4: Reemplaza la cantidad actual de un producto localizado de forma exacta
+void actualizarStock(string productos[], string marcas[], int cantidades[], int total) {
+    if (total == 0) {
+        cout << "El inventario esta vacio.\n";
+        return;
+    }
+
+    string nom, mar;
+    cout << "Nombre exacto del producto: ";
+    getline(cin, nom);
+    cout << "Marca exacta del producto: ";
+    getline(cin, mar);
+
+    int idx = buscarExacto(productos, marcas, total, nom, mar);
+    if (idx == -1) {
+        cout << "Producto no encontrado.\n";
+        return;
+    }
+
+    int nuevoStock;
+    cout << "Stock actual: " << cantidades[idx] << ". Ingrese el nuevo stock (>= 0): ";
+    if (!(cin >> nuevoStock)) {
+        cin.clear();
+        cin.ignore(10000, '\n');
+        cout << "Error: Valor invalido.\n";
+        return;
+    }
+    cin.ignore(10000, '\n');
+
+    if (nuevoStock < 0) {
+        cout << "Error: El stock no puede ser negativo. Operacion cancelada.\n";
+        return;
+    }
+
+    int anterior = cantidades[idx];
+    cantidades[idx] = nuevoStock;
+    cout << "Stock actualizado -> Anterior: " << anterior << " | Nuevo: " << cantidades[idx] << "\n";
+}
