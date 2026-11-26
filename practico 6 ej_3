@@ -1,0 +1,26 @@
+#include <iostream>
+using namespace std;
+
+void desglosarNumero(int n, int &m, int &c, int &d, int &u) {
+    m = n / 1000;
+    c = (n % 1000) / 100;
+    d = (n % 100) / 10;
+    u = n % 10;
+}
+
+int main() {
+    int n, m, c, d, u;
+    cout << "Ingrese un numero entero positivo menor que 10000: ";
+    cin >> n;
+
+    if (n > 0 && n < 10000) {
+        desglosarNumero(n, m, c, d, u);
+        cout << "Unidades de mil (m): " << m << endl;
+        cout << "Centenas (c): " << c << endl;
+        cout << "Decenas (d): " << d << endl;
+        cout << "Unidades (u): " << u << endl;
+    } else {
+        cout << "Numero fuera de rango." << endl;
+    }
+    return 0;
+}
