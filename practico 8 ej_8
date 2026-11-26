@@ -1,0 +1,48 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+const int MAX = 100;
+
+void leerVector(double v[], int n);
+void buscarMayorDiferencia(const double A[], int n, double &maxDif, double &e1, double &e2);
+void mostrar(double maxDif, double e1, double e2);
+
+int main() {
+    int n;
+    double A[MAX], maxDif, e1, e2;
+    cout << "Cantidad de elementos (>=2): ";
+    cin >> n;
+    if (n >= 2 && n <= MAX) {
+        leerVector(A, n);
+        buscarMayorDiferencia(A, n, maxDif, e1, e2);
+        mostrar(maxDif, e1, e2);
+    }
+    return 0;
+}
+
+void leerVector(double v[], int n) {
+    for (int i = 0; i < n; i++) {
+        cout << "A[" << i << "]: ";
+        cin >> v[i];
+    }
+}
+
+void buscarMayorDiferencia(const double A[], int n, double &maxDif, double &e1, double &e2) {
+    maxDif = abs(A[1] - A[0]);
+    e1 = A[0];
+    e2 = A[1];
+    for (int i = 1; i < n - 1; i++) {
+        double dif = abs(A[i + 1] - A[i]);
+        if (dif > maxDif) {
+            maxDif = dif;
+            e1 = A[i];
+            e2 = A[i + 1];
+        }
+    }
+}
+
+void mostrar(double maxDif, double e1, double e2) {
+    cout << "Mayor diferencia absoluta: " << maxDif << "\n";
+    cout << "Elementos: " << e1 << " y " << e2 << "\n";
+}
