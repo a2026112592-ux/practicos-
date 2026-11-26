@@ -1,0 +1,43 @@
+#include <iostream>
+using namespace std;
+
+const int MAX = 100;
+
+void leerVector(double v[], int n);
+void contar(const double A[], int n, int &pos, int &neg, int &cer);
+void mostrar(int pos, int neg, int cer);
+
+int main() {
+    int n, pos, neg, cer;
+    double A[MAX];
+    cout << "Cantidad: ";
+    cin >> n;
+    if (n > 0 && n <= MAX) {
+        leerVector(A, n);
+        contar(A, n, pos, neg, cer);
+        mostrar(pos, neg, cer);
+    }
+    return 0;
+}
+
+void leerVector(double v[], int n) {
+    for (int i = 0; i < n; i++) {
+        cout << "A[" << i << "]: ";
+        cin >> v[i];
+    }
+}
+
+void contar(const double A[], int n, int &pos, int &neg, int &cer) {
+    pos = 0;
+    neg = 0;
+    cer = 0;
+    for (int i = 0; i < n; i++) {
+        if (A[i] > 0) pos++;
+        else if (A[i] < 0) neg++;
+        else cer++;
+    }
+}
+
+void mostrar(int pos, int neg, int cer) {
+    cout << "Positivos: " << pos << "\nNegativos: " << neg << "\nCeros: " << cer << "\n";
+}
