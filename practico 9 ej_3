@@ -1,0 +1,31 @@
+// Ejercicio 3: Búsqueda parcial por nombre usando find()
+void buscarProductos(const string productos[], const string marcas[], const int cantidades[], int total) {
+    if (total == 0) {
+        cout << "El inventario esta vacio.\n";
+        return;
+    }
+
+    string texto;
+    cout << "Ingrese palabra o fragmento a buscar en el nombre: ";
+    getline(cin, texto);
+
+    if (texto.empty()) {
+        cout << "Error: La busqueda no puede estar vacia.\n";
+        return;
+    }
+
+    int encontrados = 0;
+    cout << "\n--- RESULTADOS DE BUSQUEDA ---\n";
+    for (int i = 0; i < total; i++) {
+        if (productos[i].find(texto) != string::npos) {
+            cout << "Indice [" << i << "] -> Nombre: " << productos[i]
+                 << " | Marca: " << marcas[i]
+                 << " | Stock: " << cantidades[i] << "\n";
+            encontrados++;
+        }
+    }
+
+    if (encontrados == 0) {
+        cout << "No se encontraron productos que contengan '" << texto << "'.\n";
+    }
+}
